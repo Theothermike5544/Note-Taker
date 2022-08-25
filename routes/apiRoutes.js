@@ -22,6 +22,8 @@ module.exports = (app) => {
         newNote.id = id;
 
         noteList.push(newNote);
+        fs.writeFile('./db/db.json', JSON.stringify(noteList), () => {
+        });
         console.log(noteList);
 
         // Removes the last index
@@ -30,8 +32,14 @@ module.exports = (app) => {
     });
     
     //Delete post
-    app.post('/api/notes/:id', (req, res) => {
-    console.log(req.params);
+    app.delete('/api/notes/:id', (req, res) => {
+        console.log(req.params.id);
+        noteList = noteList.filter( (note) =>  {
+            return note.id != req.params.id 
+        });
+        fs.writeFile('./db/db.json', JSON.stringify(noteList), () => {
+            res.json(noteList);
+        });
     });
     
 }; 
