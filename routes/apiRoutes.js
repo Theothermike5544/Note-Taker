@@ -23,10 +23,15 @@ module.exports = (app) => {
 
         noteList.push(newNote);
         console.log(noteList);
+
+        // Removes the last index
+        res.json(noteList.slice(-1));
+
     });
     
     //Delete post
     app.post('/api/notes/:id', (req, res) => {
     console.log(req.params);
     });
+    
 }; 
