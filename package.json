@@ -8,8 +8,17 @@
     "start": "node server.js",
     "watch": "nodemon server.js"
   },
-  "author": "Michael Bishop",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Theothermike5544/Note-Taker.git"
+  },
+  "keywords": [],
+  "author": "",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Theothermike5544/Note-Taker/issues"
+  },
+  "homepage": "https://github.com/Theothermike5544/Note-Taker#readme",
   "dependencies": {
     "express": "^4.18.1",
     "uuid": "^8.3.2"
