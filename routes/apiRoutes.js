@@ -1,30 +1,32 @@
 // LOAD DATA
 let dB = require("../db/db.json");
+const { v4: uuid } = require('uuid')
 const fs = require('fs')
 
-// ROUTING
+// API ROUTING:
 
 module.exports = (app) => {
-  // API GET Requests
-  // Below code handles when users "visit" a page.
-  // In each of the below cases when a user visits a link
-  // (ex: localhost:PORT/api/admin... they are shown a JSON of the data in the table)
-  // ---------------------------------------------------------------------------
+  
+    //* GET `/api/notes` - Should read the `db.json` file and return all saved notes as JSON.
+    let noteList = JSON.parse(fs.readFileSync('./db/db.json', 'utf8'));
 
-  app.get('/api/notes', (req, res) => res.json(dB));
+    // API GET Requests
+    // Below code handles when users "visit" a page.
 
-  // API POST Requests
-  app.post('/api/notes', (req, res) => {
-      console.log(req.body);
-      fs.writeFile
+    app.get('/api/notes', (req, res) => res.json(noteList));
 
-  });
+    // API POST Requests
+    app.post('/api/notes', (req, res) => {
+        let id = uuid();
+        let newNote = req.body;
+        newNote.id = id;
 
-  //Delete post
-  app.post('/api/notes/:id', (req, res) => {
+        noteList.push(newNote);
+        console.log(noteList);
+    });
+    
+    //Delete post
+    app.post('/api/notes/:id', (req, res) => {
     console.log(req.params);
-
-});
-
-
+    });
 }; 
